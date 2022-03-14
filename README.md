@@ -9,3 +9,7 @@ A simple package manager, so you can use apt easily
       Open the directory with aptgui.py
       Type in: python (or python3) aptgui.py
 # You are done!
+
+# Releases
+  
+  0.1.1 - Basic options
