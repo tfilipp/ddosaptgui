@@ -9,23 +9,35 @@ def main():
 	lang = config.config['lang']
 	langpkg = config.translate[lang]
 	if config.config['osAUTODETECT']:
-		osD,userOS = libs.detectOS()
+		osD,userOS,spkg = libs.detectOS(langpkg,config.config['pkgautodetect'])
 		if osD == 'noos':
 			print(langpkg['noos'])
 			exit()
 	else:
 		fq =  config.config['os']
-		if fq['arch']:
-			osD = 'arch'
-		elif fq['debian']:
-			osD = 'debian'
+		if fq['pacman']:
+			osD = 'pacman'
+			userOS = 'pacman/*'
+		elif fq['apt']:
+			osD = 'apt'
+			userOS = 'apt/*'
+		elif fq['yay']:
+			osD = 'yay'
+			userOS = 'yay/*'
+		elif fq['pamac']:
+			osD = 'pamac'
+			userOS = 'pamac/*'
+	if config.config['osAUTODETECT'] == False:
+		userOS = 'custom'
+		spkg = ['pacman','yay','pamac','apt']
 	if config.config['clsX']:
 		clsX = True
 	else:
 		clsX = False
 	libs.cls(clsX)
+
 	welcome(osD,langpkg,userOS)
-	select(osD,clsX,langpkg)
+	select(osD,clsX,langpkg,spkg,userOS,config.commands,config.translate)
 
 def welcome(osD,lang,userOS):
 	if osD == 'debian':
@@ -49,7 +61,7 @@ def welcome(osD,lang,userOS):
 		print(f"                {lang['detectedOS'][1]}: {osD}/*-based ")	
 	print(" ")
 
-def select(osD,clsX,lang):
+def select(osD,clsX,lang,spkg,userOS,commands,translate):
 	while (True):
 		print(f"{lang['action']}:")
 		print (" ")
@@ -62,6 +74,7 @@ def select(osD,clsX,lang):
 			lang['about'],
 			lang['edit']['os'],
 			lang['edit']['cls'],
+			lang['changelang'],
 			lang['exit']
 		])
 		print('')
@@ -77,14 +90,16 @@ def select(osD,clsX,lang):
 		elif i == "5":
 			libs.about(clsX)
 		elif i == "6":
-			osD = libs.chos(clsX,osD)
+			osD = libs.chos(clsX,osD,spkg,userOS,commands,lang) #clsX,osD,spkg,userOS,commands
 		elif i == "7":
 			clsX = libs.clsXc(clsX)
 		elif i == "8":
+			lang = translate[input(f"{lang['inputlang']} :")]
+		elif i == "9":
 			libs.ext(clsX)
 		else:
 			libs.cls(clsX)
-			welcome(osD)
+			welcome(osD,lang,userOS)
 			print (" ")
 			print (Fore.RED + f"{lang['input']}")
 			print (" ")

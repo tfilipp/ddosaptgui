@@ -1,17 +1,21 @@
 config = {
 	'os': {
-		'arch': True,
-		'debian': False
+		'pacman': 'True',
+        'pamac': 'False',
+        'yay': 'False',
+        'apt': 'False'
 	},
 	'clsX': True,
 	'osAUTODETECT': True,
+    # 'osAUTODETECT': False,
+    'pkgautodetect': True,
     'lang': 'ru'
 }
 commands = {
-    'install': {'arch':'sudo pacman -S ','debian':'sudo apt install '},
-    'update': {'arch':'sudo pacman -Sy','debian':'sudo apt update'},
-    'upgrade': {'arch':'sudo pacman -Syu','debian':'sudo apt upgrade'},
-    'remove': {'arch':'sudo pacman -R ','debian':'sudo apt remove'}
+    'install': {'pacman':'sudo pacman -S ','apt':'sudo apt install ','yay':'yay -S ','pamac':'sudo pamac install '},
+    'update': {'pacman':'sudo pacman -Sy','apt':'sudo apt update','yay':'sudo yay -Sy','pamac':'sudo pamac update'},
+    'upgrade': {'pacman':'sudo pacman -Syu','apt':'sudo apt upgrade','yay':'yay -Syu','pamac':'sudo pamac upgrade'},
+    'remove': {'pacman':'sudo pacman -R ','apt':'sudo apt remove ','yay':'sudo yay -R ','pamac':'sudo pamac remove '}
 }
 translate = {
     'en': {
@@ -32,7 +36,11 @@ translate = {
         'passwarn': 'You might input your password if you have not already.',
         'nocom': 'No commands',
         'noos': 'No os. EDIT commands, changeos and detectos function',
-        'pkgname': 'Package name'
+        'pkgname': 'Package name',
+        'spkg':'Supported package managers in system',
+        'inputpkg':'Input a number of package manager',
+        'changelang': 'Change language',
+        'inputlang': 'Input lang (ru/en)'
     },
     'ru': {
         'detectedOS':['Обнаруженая система','СИСТЕМА (в конфиге)'],
@@ -52,6 +60,10 @@ translate = {
         'passwarn': 'Вводите пароль.',
         'nocom': 'Нет комманд',
         'noos': 'Такой системы нет :(. Поменяйте команды (в config.py), detectos,changeos (в libs.py)',
-        'pkgname': 'Имя пакета'
+        'pkgname': 'Имя пакета',
+        'spkg':'Поддерживаемые пакетные менеджеры',
+        'inputpkg':'Введите номер пакетного менеджера',
+        'changelang':'Поменять язык',
+        'inputlang': 'Введите язык (ru/en)'
     }
 }

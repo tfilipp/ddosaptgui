@@ -6,14 +6,40 @@ from colorama import Fore,init
 init(autoreset=True)
 
 # detectOS
-def detectOS():
+def detectOS(lang,auto):
+    spkg = []
     if os.path.exists('/usr/bin/apt'):
-        osX = 'debian'
-    elif os.path.exists('/usr/bin/pacman'):
-        osX = 'arch'
+        osX = 'apt'
+        spkg.append('apt')
     else:
+        if os.path.exists('/usr/bin/pacman'):
+            osX = 'pacman'
+            spkg.append('pacman')
+        if os.path.exists('/usr/bin/yay'):
+            osX = 'yay'
+            spkg.append('yay')
+        if os.path.exists('/usr/bin/pamac'):
+            osX = 'pamac'
+            spkg.append('pamac')
+    if spkg == []:
         return 'noos'
-    return osX,distro.id()
+    if auto == False:
+        print(f"{lang['spkg']}:")
+        welcomecomprint(spkg)
+        x = input(f"{lang['inputpkg']} :")
+        osX = spkg[x-1]
+    else:
+        if 'apt' in spkg:
+            osX = 'apt'
+            return osX,distro.id(),spkg        
+        if 'pacman' in spkg:
+            osX = 'pacman'
+        if 'yay' in spkg:
+            osX = 'yay'
+            return osX,distro.id(),spkg
+        if 'pamac' in spkg:
+            osX = 'pamac'  
+    return osX,distro.id(),spkg
 
 # clsX
 def cls(clsX):
@@ -29,16 +55,23 @@ def welcomecomprint(list):
 def gencommand(osX,c,pkg):
 	def qQ(osX,q,pkg):
 		if pkg == 'none' or pkg == 'None':
-			if osX == 'arch':
-				return str(q['arch'])
-			elif osX == 'debian':
-				return str(q['debian'])
-		else:	
-			if osX == 'arch':
-				return str(q['arch']) + str(pkg)
-			elif osX == 'debian':
-				return str(q['debian']) + str(pkg)
-
+			if osX == 'yay':
+				return str(q['yay'])
+			elif osX == 'pamac':
+				return str(q['pamac'])
+			elif osX == 'pacman':
+				return str(q['pacman'])
+			elif osX == 'apt':
+				return str(q['apt'])
+		else: return str(q[osX]) + str(pkg)
+            # if osX == 'yay':
+            #     return str(q['yay']) + str(pkg)
+            # elif osX == 'pamac':
+            #     return str(q['pamac']) + str(pkg)
+            # elif osX == 'pacman':
+            #     return str(q['pacman']) + str(pkg)
+            # elif osX == 'apt':
+            #     return str(q['apt']) + str(pkg)	
 
 	if c == 'install':
 		q = config.commands['install']
@@ -137,14 +170,23 @@ def about(clsX):
     """)
 
 # change os
-def chos(clsX,osD):
+def chos(clsX,osD,spkg,userOS,commands,lang):
     cls(clsX)
+    print(f"{userOS}: {osD} --> ?")
+    print("")
     osss = osD
-    if osD == 'arch':
-        osD = 'debian'
-    elif osD == 'debian':
-        osD = 'arch'
-    print(f"{osss} --> {osD}")
+    print(f"{lang['spkg']}:")
+    print("")
+    welcomecomprint(spkg)
+    print("")
+    x = input(f"{lang['inputpkg']} :")
+    osD = spkg[int(x)-1]
+    print(f"{userOS}: {osss} --> {osD}")
+    print(f"{lang['install']} :{commands['install'][osD]}")
+    print(f"{lang['update']} :{commands['update'][osD]}")
+    print(f"{lang['upgrade']} :{commands['upgrade'][osD]}")
+    print(f"{lang['remove']} :{commands['remove'][osD]}")
+    print("")
     return osD
 
 # clear terminal
