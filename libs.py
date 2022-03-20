@@ -1,21 +1,24 @@
 import os
 import config
+import distro
 from colorama import Fore,init
 
 init(autoreset=True)
+
+# detectOS
+def detectOS():
+    if os.path.exists('/usr/bin/apt'):
+        osX = 'debian'
+    elif os.path.exists('/usr/bin/pacman'):
+        osX = 'arch'
+    else:
+        return 'noos'
+    return osX,distro.id()
 
 # clsX
 def cls(clsX):
 	if clsX:
 		os.system("clear")
-
-# detectOS
-def detectOS():
-	if os.path.exists('/usr/bin/pacman'):
-		osX = 'arch'
-	elif os.path.exists('/usr/bin/apt'):
-		osX = 'debian'
-	return osX
 
 # commandGEN
 def gencommand(osX,c,pkg):
@@ -54,7 +57,7 @@ def ext(clsX):
     exit()
 
 # install
-def install(clsX,osD):
+def install(clsX,osD,lang):
     cls(clsX)
     print(" ")
     print(Fore.GREEN + """
@@ -62,7 +65,7 @@ def install(clsX,osD):
     █ █ ▀█ ▄█  █  █▀█ █▄▄ █▄▄   █▀▀ █▀█ █▄▄ █ █ █▀█ █▄█ ██▄
     """)
     print(" ")
-    print(Fore.RED+"You might input your password if you have not already.")
+    print(Fore.RED+f"{lang['install']}")
     print(" ")
     ip=input("Package name>>>")
     q = gencommand(osD,'install',ip)
@@ -70,7 +73,7 @@ def install(clsX,osD):
     cls(clsX)
 
 # update
-def update(clsX,osD):
+def update(clsX,osD,lang):
     cls(clsX)
     print(" ")
     print(Fore.GREEN + """
@@ -78,14 +81,14 @@ def update(clsX,osD):
     █▄█ █▀▀ █▄▀ █▀█  █  ██▄   █▀▄ ██▄ █▀▀ █▄█ ▄█
         """)
     print(" ")
-    print(Fore.RED+"You might input your password if you have not already.")
+    print(Fore.RED+f"{lang['install']}")
     print(" ")
     		# os.system("sudo apt update && clear")
     os.system(gencommand(osD,'update','none'))
     cls(clsX)
 
 # upgrade
-def upgrade(clsX,osD):
+def upgrade(clsX,osD,lang):
     cls(clsX)
     print(" ")
     print(Fore.GREEN + """
@@ -93,7 +96,7 @@ def upgrade(clsX,osD):
     █▄█ █▀▀ █▄█ █▀▄ █▀█ █▄▀ ██▄   █▀█ █▄▄ █▄▄   █▀▀ █▀█ █▄▄ █ █ █▀█ █▄█ ██▄ ▄█
         """)
     print(" ")
-    print(Fore.RED+"You might input your password if you have not already.")
+    print(Fore.RED+f"{lang['install']}")
     print(" ")
     os.system(gencommand(osD,'upgrade','None'))
     cls(clsX)
@@ -120,7 +123,7 @@ def chos(clsX,osD):
         osD = 'debian'
     elif osD == 'debian':
         osD = 'arch'
-    print(f"Current os: {osss} --> {osD}")
+    print(f"{osss} --> {osD}")
     return osD
 
 # clear terminal
@@ -133,5 +136,5 @@ def clsXc(clsX):
     else:
         if True:
             clsX = True
-    print(f"Enable cls() is: {clssss} --> {clsX}")
+    print(f"cls(): {clssss} --> {clsX}")
     return clsX

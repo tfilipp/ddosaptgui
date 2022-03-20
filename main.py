@@ -6,8 +6,13 @@ init(autoreset=True)
 
 
 def main():
+	lang = config.config['lang']
+	langpkg = config.translate[lang]
 	if config.config['osAUTODETECT']:
-		osD = libs.detectOS()
+		osD,userOS = libs.detectOS()
+		if osD == 'noos':
+			print(langpkg['noos'])
+			exit()
 	else:
 		fq =  config.config['os']
 		if fq['arch']:
@@ -19,10 +24,10 @@ def main():
 	else:
 		clsX = False
 	libs.cls(clsX)
-	welcome(osD)
-	select(osD,clsX)
+	welcome(osD,langpkg,userOS)
+	select(osD,clsX,langpkg)
 
-def welcome(osD):
+def welcome(osD,lang,userOS):
 	if osD == 'debian':
 		print (Fore.GREEN + """
 
@@ -39,35 +44,29 @@ def welcome(osD):
 
 		print(Fore.BLUE + "               ========================================")
 	if config.config['osAUTODETECT']:
-		print(f"                detected OS: {osD} ")	
+		print(f"                {lang['detectedOS'][0]}: {userOS} ")	
 	else:
-		print(f"                OS (in config): {osD} ")	
+		print(f"                {lang['detectedOS'][1]}: {osD}/*-based ")	
 	print(" ")
 
-def select(osD,clsX):
+def select(osD,clsX,lang):
 	while (True):
-		print("Choose action:")
+		print(f"{lang['action']}:")
 		print (" ")
+		print(f"1. {lang['install']}\n2. {lang['update']}\n3. {lang['upgrade']}\n4. {lang['about']}\n5. {lang['edit']['os']}\n6. {lang['edit']['cls']}\n7. {lang['exit']}")
 		print("""
-			1. Install package
-			2. Update repos
-			3. Upgrade all packages
-			4. About
-			5. Change os
-			6. enable/disable cls()
-			7. Exit
 
 
 
 
 			""")
-		i=input("Selection>>>")
+		i=input(f"{lang['select']}>>>")
 		if i == "1":
-			libs.install(clsX,osD)
+			libs.install(clsX,osD,lang)
 		elif i == "2":
-			libs.update(clsX,osD)
+			libs.update(clsX,osD,lang)
 		elif i == "3":
-			libs.upgrade(clsX,osD)
+			libs.upgrade(clsX,osD,lang)
 		elif i == "4":
 			libs.about(clsX)
 		elif i == "5":
@@ -80,7 +79,7 @@ def select(osD,clsX):
 			libs.cls(clsX)
 			welcome(osD)
 			print (" ")
-			print (Fore.RED + "Please check that you typed a NUMBER from 1-7.")
+			print (Fore.RED + f"{lang['input']}")
 			print (" ")
 
 if __name__ == '__main__':
