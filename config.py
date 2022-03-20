@@ -31,7 +31,8 @@ translate = {
         'input':'Please check that you typed a NUMBER from 1-7.',
         'passwarn': 'You might input your password if you have not already.',
         'nocom': 'No commands',
-        'noos': 'No os. EDIT commands, changeos and detectos function'
+        'noos': 'No os. EDIT commands, changeos and detectos function',
+        'pkgname': 'Package name'
     },
     'ru': {
         'detectedOS':['Обнаруженая система','СИСТЕМА (в конфиге)'],
@@ -50,6 +51,7 @@ translate = {
         'input':'Проверьте что вы ввели цифру от 1 до 7.',
         'passwarn': 'Вводите пароль.',
         'nocom': 'Нет комманд',
-        'noos': 'Такой системы нет :(. Поменяйте команды (в config.py), detectos,changeos (в libs.py)'
+        'noos': 'Такой системы нет :(. Поменяйте команды (в config.py), detectos,changeos (в libs.py)',
+        'pkgname': 'Имя пакета'
     }
 }

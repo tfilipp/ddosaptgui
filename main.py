@@ -53,13 +53,18 @@ def select(osD,clsX,lang):
 	while (True):
 		print(f"{lang['action']}:")
 		print (" ")
-		print(f"1. {lang['install']}\n2. {lang['remove']}\n3. {lang['update']}\n4. {lang['upgrade']}\n5. {lang['about']}\n6. {lang['edit']['os']}\n7. {lang['edit']['cls']}\n8. {lang['exit']}")
-		print("""
 
-
-
-
-			""")
+		libs.welcomecomprint([
+			lang['install'],
+			lang['remove'],
+			lang['update'],
+			lang['upgrade'],
+			lang['about'],
+			lang['edit']['os'],
+			lang['edit']['cls'],
+			lang['exit']
+		])
+		print('')
 		i=input(f"{lang['select']}>>>")
 		if i == "1":
 			libs.install(clsX,osD,lang)

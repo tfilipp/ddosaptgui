@@ -20,6 +20,11 @@ def cls(clsX):
 	if clsX:
 		os.system("clear")
 
+def welcomecomprint(list):
+    for i in range(len(list)):
+        print(f"{Fore.GREEN}[{i+1}] {Fore.YELLOW}{list[i]}")
+
+
 # commandGEN
 def gencommand(osX,c,pkg):
 	def qQ(osX,q,pkg):
@@ -67,7 +72,7 @@ def install(clsX,osD,lang):
     print(" ")
     print(Fore.RED+f"{lang['install']}")
     print(" ")
-    ip=input("Package name>>>")
+    ip=input(f"{lang['pkgname']}>>>")
     q = gencommand(osD,'install',ip)
     os.system(q)
     cls(clsX)
@@ -83,7 +88,7 @@ def deletee(clsX,osD,lang):
     print(" ")
     print(Fore.RED+f"{lang['remove']}")
     print(" ")
-    ip=input("Package name>>>")
+    ip=input(f"{lang['pkgname']}>>>")
     q = gencommand(osD,'remove',ip)
     os.system(q)
     cls(clsX)
