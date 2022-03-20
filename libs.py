@@ -72,6 +72,22 @@ def install(clsX,osD,lang):
     os.system(q)
     cls(clsX)
 
+# delete
+def deletee(clsX,osD,lang):
+    cls(clsX)
+    print(" ")
+    print(Fore.GREEN + """
+    █▀█ █▀▀ █▄  ▄█ █▀█ ▀▄    ▄▀ █▀▀  █▀█ ▄▀█ █▀▀ █▄▀ ▄▀█ █▀▀ █▀▀
+    █▀▄ ██▄ █ ▀▀ █ █▄█   ▀▄▄▀   ██▄  █▀▀ █▀█ █▄▄ █ █ █▀█ █▄█ ██▄
+    """)
+    print(" ")
+    print(Fore.RED+f"{lang['remove']}")
+    print(" ")
+    ip=input("Package name>>>")
+    q = gencommand(osD,'remove',ip)
+    os.system(q)
+    cls(clsX)
+
 # update
 def update(clsX,osD,lang):
     cls(clsX)
@@ -81,7 +97,7 @@ def update(clsX,osD,lang):
     █▄█ █▀▀ █▄▀ █▀█  █  ██▄   █▀▄ ██▄ █▀▀ █▄█ ▄█
         """)
     print(" ")
-    print(Fore.RED+f"{lang['install']}")
+    print(Fore.RED+f"{lang['update']}")
     print(" ")
     		# os.system("sudo apt update && clear")
     os.system(gencommand(osD,'update','none'))
@@ -96,7 +112,7 @@ def upgrade(clsX,osD,lang):
     █▄█ █▀▀ █▄█ █▀▄ █▀█ █▄▀ ██▄   █▀█ █▄▄ █▄▄   █▀▀ █▀█ █▄▄ █ █ █▀█ █▄█ ██▄ ▄█
         """)
     print(" ")
-    print(Fore.RED+f"{lang['install']}")
+    print(Fore.RED+f"{lang['upgrade']}")
     print(" ")
     os.system(gencommand(osD,'upgrade','None'))
     cls(clsX)

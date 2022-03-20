@@ -20,6 +20,7 @@ translate = {
         'install':'Install package',
         'update': 'Update repos',
         'upgrade': 'Upgrade all packages',
+        'remove': 'Remove package',
         'about': 'About',
         'edit': {
             'os': 'Change os',
@@ -38,6 +39,7 @@ translate = {
         'install':'Установить пакет',
         'update': 'Обновить репозитории',
         'upgrade': 'Обновить пакеты',
+        'remove': 'Удалить пакет',
         'about': 'О нас',
         'edit': {
             'os': 'Изменить систему',

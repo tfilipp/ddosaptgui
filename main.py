@@ -53,7 +53,7 @@ def select(osD,clsX,lang):
 	while (True):
 		print(f"{lang['action']}:")
 		print (" ")
-		print(f"1. {lang['install']}\n2. {lang['update']}\n3. {lang['upgrade']}\n4. {lang['about']}\n5. {lang['edit']['os']}\n6. {lang['edit']['cls']}\n7. {lang['exit']}")
+		print(f"1. {lang['install']}\n2. {lang['remove']}\n3. {lang['update']}\n4. {lang['upgrade']}\n5. {lang['about']}\n6. {lang['edit']['os']}\n7. {lang['edit']['cls']}\n8. {lang['exit']}")
 		print("""
 
 
@@ -64,16 +64,18 @@ def select(osD,clsX,lang):
 		if i == "1":
 			libs.install(clsX,osD,lang)
 		elif i == "2":
-			libs.update(clsX,osD,lang)
+			libs.deletee(clsX,osD,lang)
 		elif i == "3":
-			libs.upgrade(clsX,osD,lang)
+			libs.update(clsX,osD,lang)
 		elif i == "4":
-			libs.about(clsX)
+			libs.upgrade(clsX,osD,lang)
 		elif i == "5":
-			osD = libs.chos(clsX,osD)
+			libs.about(clsX)
 		elif i == "6":
-			clsX = libs.clsXc(clsX)
+			osD = libs.chos(clsX,osD)
 		elif i == "7":
+			clsX = libs.clsXc(clsX)
+		elif i == "8":
 			libs.ext(clsX)
 		else:
 			libs.cls(clsX)
